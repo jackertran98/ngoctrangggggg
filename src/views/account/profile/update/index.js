@@ -22,7 +22,7 @@ import ComponentTextInput, {
   FormTextInputNoIcon,
 } from "../../../../components/textinput";
 import ImagePicker from "react-native-image-picker";
-import Clipboard from '@react-native-community/clipboard';
+// import Clipboard from '@react-native-community/clipboard';
 import { _retrieveData } from "../../../../utils/asynStorage";
 import { USER_NAME, PASSWORD } from "../../../../utils/asynStorage/store";
 import { COLOR } from "../../../../utils/color/colors";
@@ -34,6 +34,7 @@ import AlertDesignNotification from "../../../../components/alert/AlertDesignNot
 import { UpdateInforAccount } from "../../../../service/account";
 import api from "../../../../api";
 import axios from "axios";
+import {bank} from './bank/listbank';
 import Spinner from "react-native-loading-spinner-overlay";
 import { ElementCustom, AlertCommon } from "../../../../components/error";
 import ListBank from "./bank";
@@ -270,7 +271,7 @@ class UpdateInformation extends Component {
         ADDRESS: address.trim(),
         STK: account.trim(),
         TENTK: nameAccount.trim(),
-        TENNH: nameBank.trim(),
+        TENNH: nameBank.vn_name.trim(),
         AVATAR: imageAvatar,
         IDSHOP: 'http://banbuonthuoc.moma.vn',
         CMT: passport.trim(),
@@ -522,6 +523,7 @@ class UpdateInformation extends Component {
       showCalendar,
       rose,
     } = this.state;
+    console.log('nameee bank',nameBank.vn_name);
     return (
       <Provider>
         <ScrollView keyboardShouldPersistTaps="handled">
@@ -612,7 +614,6 @@ class UpdateInformation extends Component {
                 }}
                 styleChild={styles.styleChild}
               />
-
               <FormTextInput
                 props={{
                   placeholder: "Số điện thoại",
@@ -655,7 +656,7 @@ class UpdateInformation extends Component {
                 }}
                 styleChild={styles.styleChild}
               />
-              <View style={{ height: sizeHeight(9), width: sizeWidth(91), marginTop: 10, marginBottom: 10, borderColor: COLOR.MAIN, borderWidth: 1, borderRadius: 5, padding: 10, backgroundColor: '#fff', flexDirection: 'row', justifyContent: 'space-between' }}>
+              <View style={{ height: sizeHeight(8), width: sizeWidth(91), marginTop: 10, marginBottom: 10, borderColor: COLOR.MAIN, borderWidth: 1, borderRadius: 5, padding: 10, backgroundColor: '#fff', flexDirection: 'row', justifyContent: 'space-between' }}>
                 <View>
                   <Text style={{ color: 'gray', marginTop: -5 }}>Mã cộng tác viên</Text>
                   <Text style={{ lineHeight: 30 }}>{this.props.authUser.USER_CODE}</Text>
@@ -941,6 +942,7 @@ class UpdateInformation extends Component {
               nameAccount={nameAccount}
               chinhanh={chinhanh}
               nameBank={nameBank}
+              navigation={this.props.navigation}
               changeStateAccount={this.changeStateAccount}
               changeStateName={this.changeStateName}
               changeStateBank={this.changeStateBank}

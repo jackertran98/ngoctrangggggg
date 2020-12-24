@@ -10,7 +10,6 @@ import { listStores, updateOrder } from '../../service/order';
 var numeral = require("numeral");
 import { handleMoney } from "../../components/money";
 import DropDownPicker from 'react-native-dropdown-picker';
-import { getConfigCommission } from '../../service/rose';
 
 class OrderMain extends Component {
     constructor(props) {

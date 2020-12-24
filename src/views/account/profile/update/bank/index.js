@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "../style";
-import { FormTextInput } from "../../../../../components/textinput";
+import ComponentTextInput, {
+  FormTextInput,
+  FormTextInputNoIcon,
+} from "../../../../../components/textinput";
 import {
   sizeFont,
   sizeWidth,
@@ -9,6 +12,16 @@ import {
 } from "../../../../../utils/helper/size.helper";
 import { COLOR } from "../../../../../utils/color/colors";
 export default class ListBank extends Component {
+    constructor(props){
+      super(props)
+    this.state={
+      namenh:''
+    }
+  }
+  changeDistrictChild=(text)=>{
+      this.setState({namenh:text})
+      this.props.changeStateBank(text);
+  }
   render() {
     const {
       account,
@@ -27,7 +40,7 @@ export default class ListBank extends Component {
     return (
       <View style={{ marginTop: sizeHeight(2) }}>
         <View style={styles.infor}>
-          <Text style={styles.textInfor}>Tài khoản ngân hành</Text>
+          <Text style={styles.textInfor}>Tài khoản ngân hàng</Text>
         </View>
         <View style={{ alignSelf: "center", marginTop: sizeHeight(1) }}>
           <FormTextInput
@@ -74,24 +87,35 @@ export default class ListBank extends Component {
           />
           <FormTextInput
             props={{
-              placeholder: "Ngân hàng",
+              placeholder: "Ngân hàng",
               placeholderTextColor: "#999",
               type: "email",
               size: sizeFont(6),
-              name: "times-circle",
-              value: nameBank,
-              onChangeText: (text) => changeStateBank(text),
+              name: "chevron-down",
+              onChangeText: (text) => null,
               primary: "#017DFF",
-              color: COLOR.BUTTON,
-              onDelete: () => deleteStateBank(),
+              color: COLOR.MAIN,
+              onDelete: () => null,
               style: styles.styleWidth,
             }}
             eye={false}
             onSetSee={this.onSetSee}
             styleTextInput={{
-              width: sizeWidth(78),
+              width: sizeWidth(76),
             }}
             styleChild={styles.styleChild}
+            pointerEvents="none"
+            value={this.state.namenh.vn_name}
+            onPressCustom={() => {
+
+              this.props.navigation.navigate("Listbank", {
+                onSetDistrictChild: this.changeDistrictChild,
+                NAME: "UpdateInformation",
+              });
+
+            }}
+            changeColor={COLOR.MAIN}
+            light
           />
           <FormTextInput
             props={{

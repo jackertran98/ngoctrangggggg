@@ -24,6 +24,7 @@ import DetailAddressCart from "../../views/carts/addresscart";
 import ListCountries from "../../views/orders/collaborator/countries";
 import ListDistrict from "../../components/district";
 import ListDistrictChild from "../../components/districtChild";
+import bank from "../../components/bank";
 import { Badge, Text } from "react-native-paper";
 import SubChildItem from "../../views/home/subchilditem";
 import NameItems from "../../views/home/nameitem";
@@ -370,7 +371,7 @@ MyHomeStack = (props) => {
         name="Thông tin CTV"
         component={Info}
         options={{
-          title:'Cập nhật thông tin',
+          title: 'Cập nhật thông tin',
           headerStyle: {
             backgroundColor: COLOR.HEADER,
           },
@@ -699,6 +700,30 @@ MyHomeStack = (props) => {
         component={ListDistrictChild}
         options={({ route }) => ({
           title: "Chọn Phường/Xã",
+          headerTitleAlign: "center",
+          headerStyle: {
+            backgroundColor: COLOR.HEADER,
+          },
+          headerTitleStyle: {
+            color: "#fff",
+          },
+          headerLeft: () => (
+            <HeaderLeftComponet
+              navigation={navigation}
+              onPress={() => navigation.navigate(route.params.NAME)}
+              name="chevron-left"
+              size={sizeFont(6)}
+              color="#fff"
+            />
+          ),
+          headerRight: () => null,
+        })}
+      />
+      <HomeStack.Screen
+        name="Listbank"
+        component={bank}
+        options={({ route }) => ({
+          title: "Chọn Ngân Hàng",
           headerTitleAlign: "center",
           headerStyle: {
             backgroundColor: COLOR.HEADER,
